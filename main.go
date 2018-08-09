@@ -1,6 +1,5 @@
 package main
 import(
-
 	"strconv"
 	"net/http"
 	"github.com/labstack/echo"
@@ -49,5 +48,5 @@ func main(){
 		data := userCollect.Users
 		return c.JSON(http.StatusCreated, data)
 	})	
-	e.Logger.Fatal(e.Start(":1323"))
+	e.Logger.Fatal(e.Start(":1234"))
 }

@@ -1,3 +1,4 @@
-#Ini Hanya Contoh Untuk  Belajar Golang Yah
+Ini Hanya Contoh Untuk Belajar Golang Yah
 
-@damasukmakd@gmail.com
+#MaklumMasihNoob
+
