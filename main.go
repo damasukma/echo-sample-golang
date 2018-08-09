@@ -2,6 +2,7 @@ package main
 import(
 	"strconv"
 	"net/http"
+	_"net/url"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 )
@@ -26,9 +27,12 @@ func main(){
 	e := echo.New()
 	e.Use(middleware.Recover())
 	e.Use(middleware.Logger())
+	
 	e.GET("/", func(c echo.Context) error{
 		userCollect := UserCollection{}
 		
+		var collect = make(map[string]interface{})
+
 		var dataClass []Class
 		for a := 0; a < 3; a++{
 			class := Class{Id: a, Class: "Class " + strconv.Itoa(a)}
@@ -40,13 +44,15 @@ func main(){
 			user := User{Name: "A " + strconv.Itoa(i), Email: "damasukmakd@gmail.com", ClassCollection: dataClass}
 			userCollect.Users = append(userCollect.Users, user) 
 		}
+			collect["title"] = "Sample Collection"
+			collect["data"] = userCollect.Users
 		
 		if err := c.Bind(&userCollect); err != nil{
 			return err
 		}
 		
-		data := userCollect.Users
-		return c.JSON(http.StatusCreated, data)
+		// data := userCollect.Users
+		return c.JSON(http.StatusCreated, collect)
 	})	
 	e.Logger.Fatal(e.Start(":1234"))
 }
